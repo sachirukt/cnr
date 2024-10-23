@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | CNR Catering</title>
+</head>
+<style>
+    /* Basic Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #2a2a2a;
+  background-color: #f7f7f7;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+section {
+  padding: 80px 0;
+  position: relative;
+}
+
+.container {
+  width: 85%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Header Section */
+.header {
+  background-image: url('images/modern-header.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-content {
+  text-align: center;
+  color: white;
+}
+
+.header-content h1 {
+  font-size: 4rem;
+  letter-spacing: 2px;
+  animation: fadeInUp 1.5s ease;
+}
+
+.header-content p {
+  font-size: 1.5rem;
+  color: black;
+  margin-top: 20px;
+  animation: fadeInUp 1.8s ease;
+}
+
+/* Story Section */
+.story .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.story .text-content {
+  width: 50%;
+  text-align: left;
+  animation: fadeInLeft 1s ease-in-out;
+}
+
+.story .image-content {
+  width: 40%;
+}
+
+.story img {
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeInRight 1.2s ease-in-out;
+}
+
+/* Services Section */
+.services .service-cards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.services .card {
+  background-color: white;
+  padding: 30px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.services .card:hover {
+  transform: translateY(-10px);
+}
+
+/* Packages Section */
+.packages .package-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.packages .package-card {
+  background-color: #e8f7ee;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.packages .package-card:hover {
+  transform: translateY(-10px);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  margin-top: 20px;
+  background-color: #1a785d;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #146a4b;
+}
+
+/* Why Us Section */
+.why-us ul {
+  list-style-type: none;
+  text-align: left;
+}
+
+.why-us ul li {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  color: #444;
+}
+
+.why-us .large-btn {
+  padding: 15px 40px;
+  background-color: #1a785d;
+  font-size: 1.2rem;
+}
+
+/* WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.whatsapp-float img {
+  width: 60px;
+  animation: pulse 2s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .story .container, .services .service-cards, .packages .package-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .story .text-content, .story .image-content {
+    width: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+</style>
+<body>
+  <!-- WhatsApp Floating Button -->
+  <div class="whatsapp-float">
+    <a href="https://wa.me/0779081378" target="_blank">
+      <img src="images/whatsapp.png" alt="WhatsApp">
+    </a>
+  </div>
+
+  <!-- Header Section -->
+  <section class="header">
+    <div class="header-content">
+      <h1>CNR Catering</h1>
+      <p>We Create Unforgettable Dining Experiences</p>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="section story">
+    <div class="container">
+      <div class="text-content">
+        <h2>Our Story</h2>
+        <p>We started CNR Catering with one goal in mind: To create unforgettable culinary experiences for events of all sizes. From weddings to corporate events and family gatherings, we aim to provide the finest service paired with delicious food.</p>
+      </div>
+      <div class="image-content">
+        <img src="images/catering-spread.jpg" alt="Our Story">
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Services Section -->
+  <section class="section services">
+    <div class="container">
+      <h2>What We Offer</h2>
+      <div class="service-cards">
+        <div class="card">
+          <h3>Weddings</h3>
+          <p>Elegant menus to make your special day truly unforgettable.</p>
+        </div>
+        <div class="card">
+          <h3>Corporate Events</h3>
+          <p>Professional catering services to impress your colleagues.</p>
+        </div>
+        <div class="card">
+          <h3>Family Gatherings</h3>
+          <p>Celebrate with family and friends over a warm meal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages Section -->
+  <section class="section packages">
+    <div class="container">
+      <h2>Our Packages</h2>
+      <div class="package-list">
+        <div class="package-card">
+          <h3>Standard</h3>
+          <p>Perfect for smaller, intimate events.</p>
+          <a href="https://wa.me/0779081378" class="btn">Contact Us on WhatsApp</a>
+        </div>
+        <div class="package-card">
+          <h3>Premium</h3>
+          <p>A larger menu with more choices for your guests.</p>
+          <a href="https://wa.me/0779081378" class="btn">Contact Us on WhatsApp</a>
+        </div>
+        <div class="package-card">
+          <h3>Executive</h3>
+          <p>The ultimate catering experience for larger events.</p>
+          <a href="https://wa.me/0779081378" class="btn">Contact Us on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="section why-us">
+    <div class="container">
+      <h2>Why Choose CNR?</h2>
+      <ul>
+        <li>High-quality ingredients sourced fresh</li>
+        <li>Customizable menus to fit your event</li>
+        <li>Experienced and professional team</li>
+        <li>Unparalleled customer satisfaction</li>
+      </ul>
+      <a href="https://wa.me/0779081378" class="btn large-btn">Contact Us Now</a>
+    </div>
+  </section>
+
+  <script>
+    // Lazy load animations as sections enter the viewport
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('.section');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  });
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+});
+
+  </script>
+</body>
+</html>

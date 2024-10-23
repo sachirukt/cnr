@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNR Food Catering</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 70px;
+            background-color: #f4f4f4;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        html, body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    width: 100%; /* Ensure body takes the full width */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+
+/*header*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header img {
+  max-width: 20vh; /* Ensure the image doesn’t exceed its container */
+    height: auto; /* Maintain aspect ratio */
+    flex-shrink: 0; /* Prevent the image from shrinking */
+    
+    /* Slide in animation */
+    animation: slideIn 1s ease-out forwards, 
+               intermittentShake 3s ease-in-out 1s infinite; /* Shake duration 0.6s with a delay */
+    animation-delay: 0s, 1s; /* No delay for slide-in, start shake after slide finishes */
+    animation-iteration-count: 1, infinite; /* Slide in once, shake infinitely */
+}
+
+/* Optional: hover effect to pause the shake */
+header img:hover {
+    animation-play-state: paused; /* Pause shake when hovering */
+}
+
+       /* Desktop navigation */
+nav.desktop-nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 19px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #2f7d32;
+}
+
+/*Contact Us button*/
+/* From Uiverse.io by alexmaracinaru */ 
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 18px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+/* Hamburger menu for mobile */
+.hamburger-container {
+    display: none; /* Hidden by default for desktop */
+    position: fixed; /* Keep it fixed so it flies in from the right */
+    top: 20px;
+    right: -100px; /* Start off-screen to the right */
+    z-index: 1000; /* Ensure it appears on top */
+    animation: slideInRight 0.8s ease-in-out forwards; /* Add slide-in animation */
+}
+
+.label-check {
+    display: none;
+}
+
+.hamburger-label {
+    width: 81px;
+    height: 45px;
+    margin-top: 9px;
+    display: block;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hamburger-label div {
+    width: 70px;
+    height: 6px;
+    background-color: #000000;
+    position: absolute;
+}
+
+.line1 {
+    transition: all 0.3s;
+}
+
+.line2 {
+    margin: 18px 0 0 0;
+    transition: 0.3s;
+}
+
+.line3 {
+    margin: 36px 0 0 0;
+    transition: 0.3s;
+}
+
+#label-check:checked + .hamburger-label .line1 {
+    transform: rotate(35deg) scaleX(0.55) translate(39px, -4.5px);
+    border-radius: 50px 50px 50px 0;
+}
+
+#label-check:checked + .hamburger-label .line3 {
+    transform: rotate(-35deg) scaleX(0.55) translate(39px, 4.5px);
+    border-radius: 0 50px 50px 50px;
+}
+
+#label-check:checked + .hamburger-label .line2 {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    width: 45px;
+}
+
+#label-check:checked + .hamburger-label {
+    transform: rotate(90deg);
+}
+
+/* Mobile specific styles */
+@media (max-width: 768px) {
+    /* Hide desktop nav on mobile */
+    nav.desktop-nav {
+        display: none;
+    }
+
+    /* Show hamburger menu on mobile */
+    .hamburger-container {
+        display: block;
+    }
+}
+
+/* Slide-in animation for the hamburger */
+@keyframes slideInRight {
+    0% {
+        right: -100px; /* Start off-screen */
+        opacity: 0;
+    }
+    100% {
+        right: 20px; /* Final position */
+        opacity: 1;
+    }
+}
+
+
+* {
+    box-sizing: border-box; /* Include padding and borders in element's total width/height */
+}
+
+/* Popup styling */
+.nav-popup {
+    position: fixed;
+    top: -100%; /* Start off-screen */
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.959); /* White background for nav */
+    z-index: 999;
+    transition: top 0.4s ease; /* Smooth slide-in effect */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px; /* Space from the top when it appears */
+    height: 100vh; /* Take full height */
+}
+
+.nav-popup.active {
+    top: 0; /* Slide in from the top */
+}
+
+.mobile-nav {
+    width: 100%; /* Full width */
+    text-align: center;
+}
+
+.mobile-nav a {
+    display: block;
+    padding-top: 102px;
+    font-size: 51px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.mobile-nav a:hover {
+    color: #2f7d32; /* Hover color */
+}
+
+        /* Slideshow Section */
+
+        
+
+/* Responsive Styles for Smaller Screens */
+@media screen and (max-width: 768px) {
+    .slide {
+        height: 99vh /* Reduce height for tablets */
+    }
+
+    .slide-text {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .slide {
+        height: 97vh; /* Reduce height further for mobile */
+    }
+
+    .popup {
+    top: 56%;
+    }
+
+    .slide-text {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+}
+
+
+
+          /* Animation keyframes for sliding in from the left */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%); /* Starts off-screen to the left */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0); /* Ends at the original position */
+        opacity: 1;
+    }
+}
+/* Animation keyframes for intermittent shaking effect */
+@keyframes intermittentShake {
+    0%, 90% { transform: rotate(0); } /* Normal position for most of the time */
+    92% { transform: rotate(-5deg); } /* Slight left tilt */
+    94% { transform: rotate(5deg); }  /* Slight right tilt */
+    96% { transform: rotate(-5deg); } /* Slight left tilt */
+    98% { transform: rotate(5deg); }  /* Slight right tilt */
+    100% { transform: rotate(0); }    /* Back to normal */
+}
+
+
+/* General why choose us Section Styling */
+.why-choose-us {
+    background: linear-gradient(135deg, #e6f7e5, #b1d8b4);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #2c5f2d;
+    margin-bottom: 40px;
+    font-weight: bold;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    width: 80px;
+    height: 4px;
+    background-color: #6ebf4b;
+    display: block;
+    margin: 20px auto;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+.section-title:hover::after {
+    width: 160px;
+}
+
+/* Cards Styling */
+.choose-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.choose-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    opacity: 0;  /* Initially hidden */
+    transform: translateX(100px) scale(0.8); /* Start position for zoom and move */
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.choose-card.show {
+    opacity: 1;
+    transform: translateX(0) scale(1); /* Fully visible and in place */
+}
+
+.choose-card h3 {
+    font-size: 1.5rem;
+    color: #2c5f2d;
+    margin: 15px 0;
+}
+
+.choose-card p {
+    font-size: 2.4vh;
+    color: #555;
+}
+
+.choose-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+.choose-icon img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.choose-card:hover .choose-icon img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+    .choose-cards {
+        grid-template-columns: 1fr;
+    }
+}
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        footer p {
+            margin: 5px;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #2f7d32;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            font-size: 20px;
+        }
+        .back-to-top:hover {
+            background-color: #1b5e20;
+        }
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 10px;
+            }
+            
+            .slide-text {
+                font-size: 48px;
+                left: 52%;
+            }
+            .cards, .package-cards {
+                padding-left: 58px;
+                padding-right: 50px;
+                flex-direction: column;
+            }
+            .card, .package-card {
+                width: 100%; /* Make cards full-width on small screens */
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .slide {
+        height: 99vh /* Reduce height for tablets */
+    }
+            .slide-text {
+                font-size: 48px;
+                left: 52%;
+            }
+            header img {
+                height: 67px; /* Reduce logo size */
+            }
+            .prev, .next {
+                font-size: 20px; /* Adjust arrow size for smaller screens */
+            }
+        }
+
+       /* Base card styling with wave animation */
+
+/* Our Services Section */
+
+.e-card {
+  opacity: 0;
+  transform: translateY(100px); /* Start below the screen */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Class that triggers the slide-in effect */
+.e-card.slide-in {
+  opacity: 1;
+  transform: translateY(0); /* Moves the card into place */
+}
+
+/* To make each card animation appear one after the other */
+.e-card:nth-child(1) {
+  transition-delay: 0.2s;
+}
+.e-card:nth-child(2) {
+  transition-delay: 0.4s;
+}
+.e-card:nth-child(3) {
+  transition-delay: 0.6s;
+}
+.e-card:nth-child(4) {
+  transition-delay: 0.8s;
+}
+.e-card:nth-child(5) {
+  transition-delay: 1s;
+}
+.services {
+            padding: 50px 10px;
+            text-align: center;
+            background-color: #fff;
+        }
+        .services h2 {
+            color: #2f7d32;
+            font-size: 30px;
+        }
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: -77px;
+        }
+
+/* water wave cards*/ 
+.e-card {
+  margin: 100px auto;
+  background: transparent;
+  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
+  position: relative;
+  width: 332px;
+  height: 330px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  width: 540px;
+  height: 700px;
+  opacity: 0.6;
+  left: 0;
+  top: 0;
+  margin-left: -50%;
+  margin-top: -70%;
+  background: linear-gradient(744deg,#af40ff,#5b42f3 60%,#00ddeb);
+}
+
+.icon {
+    width: 6em;
+  margin-top: -1em;
+  padding-bottom: 1em;
+}
+
+.infotop {
+  text-align: center;
+  font-size: 20px;
+  position: absolute;
+  top: 5.6em;
+  left: 0;
+  right: 0;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 100;
+  position: relative;
+  top: 1em;
+  text-transform: lowercase;
+}
+
+.wave:nth-child(2),
+.wave:nth-child(3) {
+  top: 210px;
+}
+
+.playing .wave {
+  border-radius: 40%;
+  animation: wave 3000ms infinite linear;
+}
+
+.wave {
+  border-radius: 40%;
+  animation: wave 55s infinite linear;
+}
+
+.playing .wave:nth-child(2) {
+  animation-duration: 4000ms;
+}
+
+.wave:nth-child(2) {
+  animation-duration: 50s;
+}
+
+.playing .wave:nth-child(3) {
+  animation-duration: 5000ms;
+}
+
+.wave:nth-child(3) {
+  animation-duration: 45s;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Popup styles */
+/* Overlay background when popup is open */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+  z-index: 999; /* Below the popup */
+  display: none;
+}
+
+/* Popup styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 527px;
+  max-width: 90%; /* For responsiveness */
+  background-color: #fff;
+  border-radius: 12px; /* Smooth corners */
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease; /* Fade-in effect */
+}
+
+.popup-content {
+  position: relative;
+  text-align: center;
+}
+
+.popup h1 {
+  color: #25D366; /* Matching your button */
+  margin-bottom: 10px; /* Space between heading and paragraph */
+  font-size: 41px;
+  font-weight: 600;
+}
+
+.popup p {
+    font-size: 23px;
+  line-height: 1.5;
+  color: #333;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: -35px;
+  right: -3px;
+  font-size: 41px;
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #555; /* Slightly darker when hovered */
+}
+
+/* Popup visible state */
+.popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Animation for popup */
+.popup.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+/* Circular WhatsApp Button Styling for Larger Screens */
+.whatsapp-button {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction when hidden */
+    z-index: 1000;
+}
+
+.whatsapp-button img {
+    width: 35px;
+    height: 35px;
+}
+
+.whatsapp-button.show {
+    opacity: 1;
+    pointer-events: auto; /* Enable interaction when visible */
+}
+
+
+
+/* Hide on smaller screens (phones) */
+@media screen and (max-width: 768px) {
+    .whatsapp-button {
+        display: none;
+    }
+}
+
+
+
+
+@media (max-width: 768px) { /* You can adjust the width as needed */
+  .cards {
+    flex-direction: column; /* Stack cards vertically on mobile */
+    margin-top: 0px;
+    align-items: center; /* Center cards */
+  }
+  
+  .e-card {
+    margin: 10px 0; /* Reduce vertical margin between cards */
+    /* Adjust width to fit screen better */
+    width: 332px;
+  }
+}
+
+@media (max-width: 325) { /* You can adjust the width as needed */
+  
+  .e-card {
+    margin: 10px 0; /* Reduce vertical margin between cards */
+    width: 232px;     /* Adjust width to fit screen better */
+  }
+}
+
+
+
+    </style>
+</head>
+
+<a href="https://wa.me/0779081378" class="cnr-whatsapp-mobile-button">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="cnr-whatsapp-icon">
+    Contact Us On WhatsApp!
+</a>
+<script>
+// Select the mobile WhatsApp button
+const whatsappMobileButton = document.querySelector('.cnr-whatsapp-mobile-button');
+
+// Function to check the scroll position and show/hide the button
+function checkScrollPosition() {
+    if (window.scrollY > 200) { // If the user has scrolled more than 200px
+        whatsappMobileButton.style.opacity = '1'; // Show the button
+        whatsappMobileButton.style.pointerEvents = 'auto'; // Allow interaction
+    } else {
+        whatsappMobileButton.style.opacity = '0'; // Hide the button
+        whatsappMobileButton.style.pointerEvents = 'none'; // Disable interaction
+    }
+}
+
+// Check the scroll position when the page loads
+window.addEventListener('load', checkScrollPosition);
+
+// Add a scroll event listener to check scroll position during scrolling
+window.addEventListener('scroll', checkScrollPosition);
+</script>
+
+<style>
+    /* Unique WhatsApp Button Styling for Mobile */
+.cnr-whatsapp-mobile-button {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    padding: 10px 15px;
+    background-color: #25d366;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+    z-index: 100;
+    opacity: 1;
+    pointer-events: auto;
+    text-decoration: none;
+}
+
+/* WhatsApp Icon Styling */
+.cnr-whatsapp-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+/* Show on smaller screens */
+@media screen and (max-width: 768px) {
+    .cnr-whatsapp-mobile-button {
+        bottom: 20px;
+        left: 39%;
+        transform: translateX(-50%);
+        color: black;
+        /* padding: 19px 4px; */
+        height: 58px;
+        font-size: 16px;
+        width: 273px;
+    }
+
+    .cnr-whatsapp-icon {
+        width: 33px;
+        height: 37px;
+        margin-right: 7px;
+    }
+}
+
+/* Hide the button on larger screens */
+@media screen and (min-width: 769px) {
+    .cnr-whatsapp-mobile-button {
+        display: none;
+    }
+}
+
+
+
+</style>
+
+
+<!-- Header -->
+<header>
+    <img src="images/logo-removebg-preview.png" alt="CNR Logo">
+    <nav class="desktop-nav">
+        <a href="#">Menu</a>
+        <a href="#">About Us</a>
+        <a href="#">Gallery</a>
+        <button class="cta">
+            <span class="hover-underline-animation"> Contact Us! </span>
+            <svg
+              id="arrow-horizontal"
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="10"
+              viewBox="0 0 46 16"
+            >
+              <path
+                id="Path_10"
+                data-name="Path 10"
+                d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                transform="translate(30)"
+              ></path>
+            </svg>
+          </button>
+          
+    </nav>
+
+    <!-- Hamburger for mobile -->
+<!-- Hamburger for mobile -->
+<div class="hamburger-container">
+    <input type="checkbox" id="label-check" class="label-check" />
+    <label for="label-check" class="menuButton">
+        <span class="top"></span>
+        <span class="mid"></span>
+        <span class="bot"></span>
+    </label>
+</div>
+
+</header>
+
+<style>
+   /* Hamburger button styles */
+.menuButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 13%;
+    color: #090909;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.menuButton:hover {
+    border: 1px solid white;
+}
+
+.menuButton:active {
+    color: #666;
+    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+
+/* Hide checkbox */
+input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+/* Span styles for hamburger lines */
+.menuButton span {
+    width: 30px;
+    height: 4px;
+    background: #131313;
+    border-radius: 100px;
+    transition: 0.3s ease;
+}
+
+/* Top line transforms into part of X */
+input[type="checkbox"]:checked + .menuButton .top {
+    transform: translateY(12px) rotate(43deg);
+    width: 40px;
+}
+
+/* Bottom line transforms into part of X */
+input[type="checkbox"]:checked + .menuButton .bot {
+    transform: translateY(-10px) rotate(-45deg);
+    width: 40px;
+    box-shadow: 0 0 10px #495057;
+}
+
+/* Middle line fades out */
+input[type="checkbox"]:checked + .menuButton .mid {
+    opacity: 0;
+}
+</style>
+
+<!-- Popup for mobile nav -->
+<div id="nav-popup" class="nav-popup hidden">
+    <nav class="mobile-nav">
+        <a href="#">Menu</a><br>
+        <a href="AboutUs.html">About Us</a><br>
+        <a href="#">Gallery</a><br>
+        <a href="#">Contact Us</a>
+    </nav>
+</div>
+
+<!-- Modern Slideshow Section -->
+<div class="slideshow-container">
+    <div class="slides">
+        <div class="slide">
+            <img src="images/main bg 1.jpg" alt="Indian Food 1" class="slide-image">
+            <div class="slide-text">
+                <h1>Culinary Magic for Memorable Moments!</h1>
+                <p>Spice up your celebrations with unforgettable flavors! Let our catering create magical memories for your special occasions!</p>
+                <button class="cta-unique">
+                    <span>Contact Us &nbsp;</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </button>                  
+            </div>
+        </div>
+        <div class="slide">
+            <img src="images/slide img2.jpg" alt="Indian Food 2" class="slide-image">
+            <div class="slide-text">
+                <h1>Delicious, Authentic Indian Cuisine</h1>
+                <p>Experience the rich and diverse flavors of India with every bite!</p>
+                <button class="cta-unique">
+                    <span>Contact Us &nbsp;</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="images/slid img 3.jpg" alt="Indian Food 3" class="slide-image">
+            <div class="slide-text">
+                <h1>Your Special Event, Our Passion!</h1>
+                <p>Let us bring the taste of tradition and elegance to your celebrations.</p>
+                <button class="cta-unique">
+                    <span>Contact Us &nbsp;</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slideshow pagination dots -->
+<div class="dot-container">
+    <span class="dot active" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+</div>
+
+<script>
+let currentSlideIndex = 0;
+const slides = document.querySelector('.slides');
+const slideCount = document.querySelectorAll('.slide').length;
+const dots = document.querySelectorAll('.dot');
+
+// Function to update active dot
+function updateDots() {
+    dots.forEach((dot, index) => {
+        if (index === currentSlideIndex) {
+            dot.classList.add('active');  // Add 'active' class to the current dot
+        } else {
+            dot.classList.remove('active');  // Remove 'active' class from others
+        }
+    });
+}
+
+// Function to show the next slide
+function nextSlide() {
+    currentSlideIndex = (currentSlideIndex + 1) % slideCount; // Loop back to the first slide
+    slides.style.transform = `translateX(-${currentSlideIndex * 100}%)`; // Move slides
+    updateDots();  // Update dots when slide changes
+}
+
+// Function to go to a specific slide when a dot is clicked
+function currentSlide(index) {
+    currentSlideIndex = index;
+    slides.style.transform = `translateX(-${currentSlideIndex * 100}%)`; // Move to the clicked slide
+    updateDots();  // Update the dots to reflect the selected slide
+}
+
+// Automatically show the next slide every 5 seconds
+setInterval(nextSlide, 5000);
+
+// Add click event listeners to each dot
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => currentSlide(index));
+});
+
+// Initialize the first active dot
+updateDots();
+
+
+</script>
+
+<style>
+/* Unique button styling */
+/* Unique button styling */
+.cta-unique {
+  position: relative;
+  margin: auto;
+  width: 318px;
+  margin-left: -17px;
+  height: 66px;
+  transition: all 0.2s ease;
+  border: 3px solid #25D366; /* WhatsApp green */
+  border-radius: 50px;
+  background: #25D366; /* WhatsApp green */
+  cursor: pointer;
+}
+
+.cta-unique:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  border-radius: 50px;
+  background: rgb(0, 0, 0);
+  width: 60px; /* Increased size */
+  height: 60px; /* Increased size */
+  transition: all 0.8s ease;
+}
+
+.cta-unique span {
+  position: relative;
+  font-family: Montserrat;
+  font-size: 24px; /* Increased font size */
+  color: rgb(0, 0, 0);
+  font-weight: 600; /* Slightly bolder text */
+  letter-spacing: 0.05em;
+}
+
+.cta-unique svg {
+  position: relative;
+  top: 0;
+  margin-left: 15px; /* Increased margin */
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(0, 0, 0);
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.5s ease;
+}
+
+.cta-unique:hover:before {
+  width: 100%;
+  background: #128c41; /* Darker WhatsApp green for hover */
+}
+
+.cta-unique:hover svg {
+  transform: translateX(0);
+  transition: all 2s ease;
+}
+
+.cta-unique:active {
+  transform: scale(0.95);
+  transition: all 2s ease;
+}
+
+
+/* Slideshow Container */
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Slideshow Images */
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+}
+
+/* Each slide */
+.slide {
+    min-width: 100%; /* Each slide takes the full width */
+    position: relative; /* To position the overlay and text */
+}
+
+.slide-image {
+    width: 100%;
+    height: 100vh;
+    margin-top: 6%;
+    object-fit: cover; /* Ensure the images cover the container */
+    filter: brightness(0.5); /* Darken the images for better text readability */
+}
+
+/* Slide Text Styling */
+.slide-text {
+    position: absolute;
+    bottom: 20%;
+    left: 5%;
+    color: #fff;
+    font-size: 3rem; /* Larger font for main text */
+    font-weight: 700; /* Bold text */
+    line-height: 1.2;
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+    max-width: 60%;
+    z-index: 10;
+}
+
+.slide-text h1 {
+    margin: 0;
+    font-size: 4rem;
+}
+
+.slide-text p {
+    margin: 10px 0 20px;
+    font-size: 1.5rem;
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ddd;
+}
+
+/* Overlay for text */
+.slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Darker overlay */
+    z-index: 5;
+}
+
+/* Pagination Dots */
+.dot-container {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    bottom: -81px;
+}
+
+/* Dots for slide navigation */
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active, .dot:hover {
+    background-color: white;
+}
+
+/* Responsive design for mobile screens */
+@media (max-width: 768px) {
+    .slide-text {
+        bottom: 10%; /* Move text lower on mobile */
+        font-size: 2rem;
+    }
+
+    .slide-text h1 {
+        font-size: 3rem;
+    }
+
+    .slide-text p {
+        font-size: 1.2rem;
+    }
+
+    .cta-button {
+        padding: 10px 20px;
+    }
+
+    .dot-container{
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-text {
+        bottom: 10%; /* Move text lower on mobile */
+        font-size: 2rem;
+    }
+
+    .slide-text h1 {
+        font-size: 3rem;
+    }
+
+    .slide-text p {
+        font-size: 1.2rem;
+    }
+
+    .cta-button {
+        padding: 10px 20px;
+    }
+
+    .dot-container{
+        bottom: 20px;
+    }
+}
+
+
+
+</style>
+
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-us">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <div class="choose-cards">
+        <div class="choose-card" id="card1">
+            <div class="choose-icon">
+                <img src="images/fresh.png" alt="Fresh Ingredients">
+            </div>
+            <h3>Fresh Ingredients</h3>
+            <p>We use only the freshest and highest quality ingredients in all our dishes, ensuring a delightful experience for your taste buds.</p>
+        </div>
+        <div class="choose-card" id="card2">
+            <div class="choose-icon">
+                <img src="images/chef.png" alt="Experienced Chefs">
+            </div>
+            <h3>Experienced Chefs</h3>
+            <p>Our team of skilled chefs brings years of culinary expertise, creating authentic Indian cuisine with a modern twist.</p>
+        </div>
+        <div class="choose-card" id="card3">
+            <div class="choose-icon">
+                <img src="images/money.png" alt="Affordable Pricing">
+            </div>
+            <h3>Affordable Pricing</h3>
+            <p>We offer competitive pricing packages tailored to meet your budget, without compromising on quality.</p>
+        </div>
+        <div class="choose-card" id="card4">
+            <div class="choose-icon">
+                <img src="images/digital.png" alt="Customizable Menus">
+            </div>
+            <h3>Customizable Menus</h3>
+            <p>From weddings to corporate events, our menus can be customized to suit your event's specific needs and preferences.</p>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Services Section -->
+<section class="services">
+    <h2>Providing Catering Services For...</h2>
+    <div class="cards">
+      <a class="e-card playing" href="standard.html">
+        <div class="image"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="infotop">
+            <img src="images/birthday.png" alt="Birthday Icon" class="icon" />
+            <br>
+          Birthday Parties <br>
+        </div>
+      </a>
+  
+      <a class="e-card playing" href="premium.html">
+        <div class="image"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="infotop">
+            <img src="images/dance2.png" alt="Birthday Icon" class="icon" />
+            <br>
+          Weddings <br>
+        </div>
+      </a>
+
+      <a class="e-card playing" href="premium.html">
+        <div class="image"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="infotop">
+            <img src="images/party2.png" alt="Birthday Icon" class="icon" />
+            <br>
+            Corporate Events <br>
+        </div>
+      </a>
+
+      <a class="e-card playing" href="premium.html">
+        <div class="image"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="infotop">
+            <img src="images/reunion.png" alt="Birthday Icon" class="icon" />
+            <br>
+          Group Events <br>
+        </div>
+      </a>
+
+      <div class="e-card playing" onclick="openPopup()">
+        <div class="image"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="infotop">
+          <img src="images/read-more.png" alt="Read More Icon" class="icon" />
+          <br>
+          And More! <br>
+        </div>
+      </div>
+      
+      <!-- Popup box -->
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close" onclick="closePopup()">&times;</span>
+          <h1>What Do We Do?</h1>
+          <p>
+            Welcome to CNR Catering! We craft delicious food experiences for groups of 20 or more. Whether it's weddings, corporate events, or family gatherings, our meals bring people together. Let us make your event truly unforgettable with a touch of flavor and joy! <br> Contact Us Now For The Best Deals!
+          </p>
+        </div>
+      </div>
+      
+  </section>
+
+  <section class="catering-services">
+    <h2 class="section-heading">Feast Your Eyes on Flavor</h2>
+    <div class="services-container">
+        <div class="service animate-left">
+            <img src="images/Gourmet Wedding Feasts.avif" alt="Gourmet Wedding Feasts" class="service-image">
+            <h3>Gourmet Wedding Feasts</h3>
+            <p>Crafting unforgettable wedding menus, bringing joy to your special day with exquisite culinary delights.</p>
+        </div>
+        <div class="service animate-left">
+            <img src="images/catering-img-1.jpg" alt="Corporate Event Catering" class="service-image">
+            <h3>Corporate Event Catering</h3>
+            <p>Elevate your corporate gatherings with our bespoke menus designed to impress and satisfy every palate.</p>
+        </div>
+        <div class="service animate-left">
+            <img src="images/party private.jpg" alt="Private Party Platters" class="service-image">
+            <h3>Private Party Platters</h3>
+            <p>Turn any celebration into a feast with our customized platters, perfect for intimate gatherings or big bashes.</p>
+        </div>
+    </div>
+</section>
+
+<script>
+    //animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const services = document.querySelectorAll('.service');
+
+        const checkVisibility = () => {
+            const triggerBottom = window.innerHeight;
+
+            services.forEach(service => {
+                const box = service.getBoundingClientRect();
+                if (box.top < triggerBottom) {
+                    service.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility(); // Initial check on page load
+    });
+</script>
+
+
+
+<style>
+    /*Animations*/
+    /* Animation */
+.service {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.service.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+    /* Section Styling */
+.catering-services {
+    padding: 40px 20px;
+    background-color: #b7471b; /* Background color similar to your image */
+    text-align: center;
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 40px;
+}
+
+/* Services Container */
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
+    gap: 20px;
+}
+
+/* Individual Service Styling */
+.service {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-image {
+    width: 100%;
+    height: 255px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.service h3 {
+    font-size: 1.5rem;
+    color: #b7471b;
+    margin: 15px 0;
+}
+
+.service p {
+    font-size: 2.6vh;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .services-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+    }
+
+    .section-heading {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-container {
+        grid-template-columns: 1fr; /* 1 column for mobile */
+    }
+
+    .service {
+        margin-bottom: 20px;
+    }
+
+    .section-heading {
+        font-size: 1.8rem;
+    }
+
+    .service h3 {
+        font-size: 2.4rem;
+    }
+
+    .service p {
+        font-size: 2.5vh;
+    }
+}
+
+</style>
+
+
+
+
+<!-- Package Details Section -->
+<section class="packages">
+    <h2 style="text-align: center; padding-top: 2vh;">Package Details</h2>
+    <div class="package-cards">
+        <div class="package-card animate-right">
+            <img src="images/slid img 3.jpg" alt="Standard Package" class="package-image">
+            <div class="card-details">
+                <h3 class="text-title">Standard Package</h3>
+                <p class="price rainbow-glow">Contact Us On WhatsApp For The Best Deals</p>
+                <p class="description">Basic catering for groups of 20 or more. Ideal for simple gatherings.</p>
+                <ul class="card-items">
+                    <li>Basic menu</li>
+                    <li>1 drink</li>
+                    <li>Buffet</li>
+                </ul>
+            </div>
+            <button class="card-button">Contact Us</button>
+        </div>
+
+        <div class="package-card popular animate-right">
+            <img src="images/primium foods.avif" alt="Premium Package" class="package-image">
+            <div class="card-details">
+                <h3 class="text-title">Premium Package</h3>
+                <p class="price rainbow-glow">Contact Us On WhatsApp For The Best Deals</p>
+                <p class="description">Enhanced menu options for all types of events. Perfect for medium-sized groups.</p>
+                <ul class="card-items">
+                    <li>Expanded menu</li>
+                    <li>2 drinks</li>
+                    <li>Buffet or plated</li>
+                </ul>
+            </div>
+            <button class="card-button">Contact Us</button>
+        </div>
+
+        <div class="package-card animate-right">
+            <img src="images/executive food.jpg" alt="Executive Package" class="package-image">
+            <div class="card-details">
+                <h3 class="text-title">Executive Package</h3>
+                <p class="price rainbow-glow">Contact Us On WhatsApp For The Best Deals</p>
+                <p class="description">Top-tier catering with premium options. Best for corporate events and special occasions.</p>
+                <ul class="card-items">
+                    <li>Gourmet menu</li>
+                    <li>3 drinks</li>
+                    <li>Plated service</li>
+                </ul>
+            </div>
+            <button class="card-button">Contact Us</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    //animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const packages = document.querySelectorAll('.package-card');
+
+        const checkVisibility = () => {
+            const triggerBottom = window.innerHeight;
+
+            packages.forEach(package => {
+                const box = package.getBoundingClientRect();
+                if (box.top < triggerBottom) {
+                    package.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility(); // Initial check on page load
+    });
+</script>
+
+  <style>
+
+    /* Animation */
+.package-card {
+    opacity: 0;
+    transform: translateX(100px); /* Move from the right */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.package-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+    /* Glowing Rainbow Text Effect */
+.rainbow-glow {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, rgb(0, 255, 149), orange, yellow, rgb(123, 196, 7), rgb(0, 238, 255));
+    background-size: 400%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: rainbow-glow 5s ease-in-out infinite;
+    text-align: center;
+    margin: 1vh 0;
+}
+
+/* Animation to shift gradient colors */
+@keyframes rainbow-glow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.packages {
+    background-color: #111;
+    padding: 4vh 0;
+    color: #fff;
+}
+
+.package-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 2%;
+    padding: 2vh 5vw;
+    flex-wrap: wrap;
+}
+
+.package-card {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    width: 32%;
+    text-align: center;
+    padding: 2vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-10px);
+}
+
+.package-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.card-details {
+    padding: 2vh 0;
+}
+
+.text-title {
+    font-size: 1.5rem;
+    margin: 1vh 0;
+}
+
+.description {
+    margin: 1vh 0 2vh;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.card-items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 2vh;
+}
+
+.card-items li {
+    margin: 0.5vh 0;
+}
+
+.card-button {
+    padding: 1vh 2vw;
+    background-color: transparent;
+    border: 2px solid #4caf50;
+    color: #4caf50;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+/* Highlight the popular package */
+.package-card.popular .text-title {
+    position: relative;
+}
+
+.package-card.popular .text-title::before {
+    content: 'Popular';
+    position: absolute;
+    top: -20px;
+    left: -5px;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 0.5vh 1vw;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .package-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .package-card {
+        width: 45%;
+        margin-bottom: 2vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .package-cards {
+        flex-direction: column;
+        width: 443px;
+        align-items: center;
+    }
+
+    .package-card {
+        width: 80%;
+        margin-bottom: 3vh;
+    }
+
+    .text-title {
+        font-size: 1.3rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .card-button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .package-card {
+        width: 95%;
+        margin-bottom: 3vh;
+    }
+
+    .text-title {
+        font-size: 1.2rem;
+        padding-top: 9px;
+    }
+
+    .description {
+        font-size: 2vh;
+    }
+
+    .card-button {
+        font-size: 0.8rem;
+        padding: 1vh 3vw;
+    }
+}
+
+  </style>
+
+<!-- Custome package section  -->
+
+<section id="cnr-custom-packages" class="cnr-custom-packages">
+    <div class="cnr-overlay">
+        <div class="cnr-container">
+            <h2 class="cnr-heading">Customized Packages</h2>
+            <p class="cnr-description">
+                Looking for something unique? We offer customized catering packages tailored to your specific needs.
+            </p>
+            <p class="cnr-contact-info">
+                For more details, please contact us via WhatsApp:
+            </p>
+            <a href="https://wa.me/0779081378" class="cnr-whatsapp-button">Contact Us On WhatsApp</a>
+        </div>
+    </div>
+    <div class="cnr-dark-tint"></div> <!-- Dark tint overlay -->
+</section>
+
+
+
+
+<style>
+#cnr-custom-packages {
+    position: relative;
+    height: 400px; /* Adjust height as needed */
+    overflow: hidden;
+    color: white; /* Text color */
+}
+
+.cnr-custom-packages::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('images/customfoods.avif'); 
+    background-size: cover;
+    background-position: center;
+    z-index: 1; /* Background image under the tint */
+}
+
+.cnr-dark-tint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark tint with 50% opacity */
+    z-index: 2; /* Dark tint above the background image */
+}
+
+.cnr-overlay {
+    position: relative;
+    z-index: 3; /* Content above both the image and the tint */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px; 
+}
+
+.cnr-container {
+    max-width: 800px;
+}
+
+.cnr-heading {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better visibility */
+}
+
+.cnr-description,
+.cnr-contact-info {
+    font-size: 1.2em;
+    margin: 10px 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+}
+
+.cnr-whatsapp-button {
+    display: inline-block;
+    background-color: #25D366; /* WhatsApp color */
+    color: rgb(0, 0, 0);
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px; /* Space above button */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cnr-whatsapp-button:hover {
+    background-color: #128C7E; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+@keyframes fly-in {
+    from {
+        transform: translateX(100%); /* Start off-screen to the right */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: translateX(0); /* End at its normal position */
+        opacity: 1; /* End fully visible */
+    }
+}
+
+.cnr-custom-packages {
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+.cnr-custom-packages.visible {
+    animation: fly-in 0.5s forwards; /* Apply animation when visible */
+    opacity: 1; /* Ensure it becomes visible */
+}
+</style>
+
+<script>
+    //animation for custom package
+    document.addEventListener('DOMContentLoaded', function () {
+        const section = document.querySelector('#cnr-custom-packages');
+    
+        const options = {
+            root: null, // Use the viewport as the root
+            threshold: 0.1 // Trigger when 10% of the section is visible
+        };
+    
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    section.classList.add('visible'); // Add the visible class to trigger the animation
+                    observer.unobserve(section); // Stop observing once the section is visible
+                }
+            });
+        }, options);
+    
+        observer.observe(section); // Start observing the section
+    });
+    </script>
+    
+  
+
+
+
+
+
+<!-- Footer -->
+<footer>
+    <p>Contact Us: 0779081378</p>
+    <p>&copy; 2024 CNR Catering Services. All rights reserved.</p>
+</footer>
+
+<!-- Back to Top Button -->
+<div class="back-to-top" onclick="scrollToTop()">&#8679;</div>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/0779081378" class="whatsapp-button" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+</a>
+
+
+<script>
+
+const labelCheck = document.getElementById('label-check');
+const navPopup = document.getElementById('nav-popup');
+
+labelCheck.addEventListener('change', () => {
+    if (labelCheck.checked) {
+        navPopup.classList.add('active'); // Slide in from top
+    } else {
+        navPopup.classList.remove('active'); // Slide out to the top
+    }
+});
+
+// Close the popup when clicking outside of it
+navPopup.addEventListener('click', (e) => {
+    if (e.target === navPopup) {
+        labelCheck.checked = false; // Uncheck the checkbox
+        navPopup.classList.remove('active'); // Hide the popup
+    }
+});
+
+
+
+    //why choose us section
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.choose-card');
+        
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);  // Stop observing once the animation is done
+                }
+            });
+        }, { threshold: 0.5 });  // Adjust this for when the animation should trigger
+        
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    });
+
+
+    // Back to top button
+    const topButton = document.querySelector('.back-to-top');
+    window.onscroll = function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            topButton.style.display = "block"; } 
+            else { topButton.style.display = "none"; } };
+            function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Scroll Animations
+const fadeIns = document.querySelectorAll('.fade-in');
+window.addEventListener('scroll', () => {
+    fadeIns.forEach((fadeIn) => {
+        const rect = fadeIn.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+            fadeIn.classList.add('active');
+        }
+    });
+});
+
+
+  // Function to open the popup
+  // Function to open the popup
+  function openPopup() {
+    document.getElementById("popup").classList.add("show", "fade-in");
+    const overlay = document.createElement("div");
+    overlay.classList.add("popup-overlay");
+    document.body.appendChild(overlay);
+    overlay.style.display = "block";
+    document.body.classList.add("popup-open"); // Disable background scroll
+  }
+
+  // Function to close the popup
+  function closePopup() {
+    document.getElementById("popup").classList.remove("show", "fade-in");
+    const overlay = document.querySelector(".popup-overlay");
+    overlay.style.display = "none";
+    document.body.classList.remove("popup-open"); // Re-enable background scroll
+    overlay.remove(); // Remove overlay after hiding
+  }
+
+
+
+// JavaScript to detect when section is in view and trigger animation
+document.addEventListener('DOMContentLoaded', function () {
+  const cards = document.querySelectorAll('.e-card');
+  const section = document.querySelector('.services');
+
+  // Function to check if the section is in view
+  function isSectionInView() {
+    const sectionPosition = section.getBoundingClientRect();
+    return sectionPosition.top <= window.innerHeight && sectionPosition.bottom >= 0;
+  }
+
+  // Function to add the slide-in effect
+  function animateCards() {
+    if (isSectionInView()) {
+      cards.forEach((card, index) => {
+        // Add a slight delay for each card
+        setTimeout(() => {
+          card.classList.add('slide-in');
+        }, index * 300); // Stagger animation delay for each card
+      });
+      // Remove the scroll event listener once animation is triggered
+      window.removeEventListener('scroll', animateCards);
+    }
+  }
+
+  // Trigger animation on scroll
+  window.addEventListener('scroll', animateCards);
+});
+
+//animations for the our packages section
+document.addEventListener('DOMContentLoaded', function () {
+  const packageCards = document.querySelectorAll('.package-card');
+  const packageSection = document.querySelector('.packages');
+
+  // Function to check if the section is in view
+  function isPackageSectionInView() {
+    const sectionPosition = packageSection.getBoundingClientRect();
+    return sectionPosition.top <= window.innerHeight && sectionPosition.bottom >= 0;
+  }
+
+  // Function to animate cards
+  function animatePackageCards() {
+    if (isPackageSectionInView()) {
+      packageCards.forEach((card, index) => {
+        // Add a slight delay for each card
+        setTimeout(() => {
+          card.classList.add('slide-in');
+        }, index * 200); // Stagger the animation delay for each card
+      });
+      // Remove scroll listener after animation is triggered
+      window.removeEventListener('scroll', animatePackageCards);
+    }
+  }
+
+  // Trigger animation on scroll
+  window.addEventListener('scroll', animatePackageCards);
+});
+
+const whatsappButton = document.querySelector('.whatsapp-button');
+window.addEventListener('scroll', () => {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollPosition > 300) {
+        whatsappButton.classList.add('show');
+    } else {
+        whatsappButton.classList.remove('show');
+    }
+});
+
+
+</script> 
+    </body> 
+</html>
